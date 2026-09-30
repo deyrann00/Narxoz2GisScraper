@@ -1,0 +1,14 @@
+{
+  "name": "narxoz-2gis",
+  "displayName": "Narxoz 2GIS",
+  "version": "0.2.0",
+  "description": "Collect 2GIS reviews of Narxoz University branches with plain Node. No browser, no login, no dependencies to install.",
+  "author": {
+    "name": "d1rannn"
+  },
+  "license": "MIT",
+  "keywords": ["2gis", "narxoz", "reviews", "social-listening", "scraper"],
+  "commands": "./commands",
+  "skills": "./skills",
+  "mcpServers": "./.mcp.json"
+}

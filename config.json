@@ -1,0 +1,14 @@
+{
+  "queries": ["Нархоз", "Narxoz"],
+  "name_filters": ["нархоз", "narxoz"],
+  "branches": [],
+  "exclude_branches": [],
+  "city": "almaty",
+  "domain": "2gis.kz",
+  "locale": "ru_KZ",
+  "timezone": "Asia/Almaty",
+  "lookback_hours": 24,
+  "week_hours": 168,
+  "max_reviews_per_branch": 500,
+  "review_api_key": ""
+}
