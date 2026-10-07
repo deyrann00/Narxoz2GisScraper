@@ -12,6 +12,11 @@ Get this machine ready to scrape. There is nothing to install and no login.
    change `queries` / `name_filters` / `city` to track a different organisation.
 5. If the archive is empty, mention that `scrape_narxoz_2gis` with `full: true` backfills
    older reviews (up to `max_reviews_per_branch` per branch).
-6. Finish by saying they can now run `/narxoz-2gis:scrape`.
+6. Report the `llm` block: if `active` is false, explain that sentiment falls back to star
+   ratings and that exporting `OPENROUTER_API_KEY` (or the variable named in `api_key_env`)
+   enables relevance filtering; the model is `llm.model` in config.json (any OpenRouter slug).
+7. Report the `email` block: to send reports, set `email.to` in config.json and export
+   `SMTP_USER` / `SMTP_PASS` (for Gmail, an app password).
+8. Finish by saying they can now run `/narxoz-2gis:scrape`.
 
 $ARGUMENTS

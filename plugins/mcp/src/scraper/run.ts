@@ -1,3 +1,4 @@
+import { analyzeReviews } from "./analyze.js";
 import { FALLBACK_API_KEY, fetchBranchReviews } from "./api.js";
 import { discoverBranches } from "./branches.js";
 import { loadConfig } from "./config.js";
@@ -11,6 +12,7 @@ import {
   saveReviews,
   saveRun,
 } from "./store.js";
+import { writeHtml } from "./view.js";
 
 /**
  * One collection pass. By default each branch is read back to the start of the
@@ -65,6 +67,21 @@ export async function scrapeOnce(root: string, full = false): Promise<Record<str
 
   const [merged, newCount] = mergeReviews(loadExisting(root), collected);
   saveReviews(root, merged);
+  // Only new or edited reviews reach the LLM; a failing LLM never fails the scrape.
+  let analysis: Record<string, unknown> | null = null;
+  try {
+    const result = await analyzeReviews(root);
+    errors.push(...result.errors);
+    analysis = {
+      model: result.model,
+      analyzed: result.analyzed,
+      relevant: result.relevant,
+      irrelevant: result.irrelevant,
+      by_sentiment: result.by_sentiment,
+    };
+  } catch (err) {
+    errors.push(`LLM: ${err instanceof Error ? err.message : String(err)}`);
+  }
   const summary = {
     ran_at: new Date().toISOString(),
     timezone: cfg.timezone,
@@ -79,8 +96,10 @@ export async function scrapeOnce(root: string, full = false): Promise<Record<str
     last_7d: lookbackReviews(merged, weekHours).length,
     new: newCount,
     total: merged.length,
+    analysis,
     errors,
     engine: "typescript",
+    dashboard: writeHtml(root),
   };
   saveRun(root, summary);
   return summary;

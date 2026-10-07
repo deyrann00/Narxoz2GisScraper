@@ -8,6 +8,23 @@ export type Reply = {
   published_at: string | null;
 };
 
+export type Sentiment = "positive" | "neutral" | "negative";
+
+/** What the LLM (or the star-rating fallback) decided about one review. */
+export type Analysis = {
+  /** Worth the administration's attention: not spam, not empty, about Narxoz. */
+  relevant: boolean;
+  sentiment: Sentiment;
+  topics: string[];
+  /** One-line gist in Russian. */
+  summary: string;
+  /** OpenRouter model slug, or "rating-fallback" when no LLM was used. */
+  model: string;
+  /** sha1 of the text the analysis was made for; a mismatch means the review was edited. */
+  text_hash: string;
+  analyzed_at: string;
+};
+
 export type Review = {
   id: string;
   branch_id: string;
@@ -27,6 +44,7 @@ export type Review = {
   url: string;
   source: string;
   scraped_at: string;
+  analysis?: Analysis;
 };
 
 /** 2GIS returns local offsets (+07:00); the archive is kept in UTC like the Threads one. */

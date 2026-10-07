@@ -11,7 +11,10 @@ Use this plugin's MCP tools. Do **not** call Python, do **not** open a browser a
 ## Tools
 
 - `scrape_narxoz_2gis` — collect reviews (`full: true` backfills the archive instead of only the last week)
-- `latest_narxoz_2gis` — read saved reviews (`hours: 168` for a week, `24` for a day, `0` for everything; `max_rating: 3` for complaints only)
+- `latest_narxoz_2gis` — read saved reviews (`hours: 168` for a week, `24` for a day, `0` for everything; `sentiment: "negative"` for complaints; irrelevant reviews are hidden unless `include_irrelevant: true`)
+- `analyze_narxoz_2gis` — classify reviews with the OpenRouter LLM (relevant or not; positive / neutral / negative; topics; one-line summary). Scrapes run it on new reviews automatically; call it with `force: true` after changing the model or prompt
+- `send_narxoz_2gis_report` — email the report over SMTP; **only when the user asks to send it**
+- `view_narxoz_2gis` — rebuild the HTML dashboard (`data/index.html`) and open it in the browser; every scrape also rebuilds it
 - `find_narxoz_2gis_branches` — search 2GIS and list the branches that will be scraped
 - `narxoz_2gis_status` — data root, tracked branches, last run
 - `narxoz_2gis_data_path` — path to `reviews.jsonl`
@@ -31,6 +34,12 @@ Which branches are tracked is decided by `config.json` in the data root reported
 
 To keep data somewhere else, set `NARXOZ_2GIS_ROOT` before starting Claude.
 
+Optional, set in the environment before starting Claude:
+
+- `OPENROUTER_API_KEY` — enables the LLM analysis; the model is `llm.model` in config.json.
+  Without it sentiment is guessed from stars and nothing is marked irrelevant.
+- `SMTP_USER` / `SMTP_PASS` plus `email.to` in config.json — enable emailing the report.
+
 ## Workflow
 
 1. `scrape_narxoz_2gis`
@@ -39,7 +48,7 @@ To keep data somewhere else, set `NARXOZ_2GIS_ROOT` before starting Claude.
 ## Reporting
 
 Open with rating and review count per branch. Prefer the last 7 days, and call out the
-last 24 hours separately when there is anything. Group by branch; give author, date, stars,
-link, and a one-line gist per review, followed by its number of replies (`replies_count`)
-and the replies themselves (`replies`, oldest first; `from_org` marks Narxoz's own).
-Lead with reviews of 3 stars or fewer and name recurring complaints.
+last 24 hours separately when there is anything. Leave irrelevant reviews out. Group by
+sentiment (negative first), then by branch; give author, date, stars, link, `summary` and
+`topics` per review, followed by its number of replies (`replies_count`) and the replies
+themselves (`replies`, oldest first; `from_org` marks Narxoz's own). Name recurring complaints.

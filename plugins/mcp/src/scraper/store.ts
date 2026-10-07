@@ -62,7 +62,7 @@ export function saveReviews(root: string, reviews: Review[]): void {
     reviews.map((review) => JSON.stringify(review)).join("\n") + (reviews.length ? "\n" : ""),
     "utf8"
   );
-  const fields: (keyof Review)[] = [
+  const fields: (keyof Review | "relevant" | "sentiment" | "topics" | "summary")[] = [
     "id",
     "branch_id",
     "branch_name",
@@ -75,12 +75,20 @@ export function saveReviews(root: string, reviews: Review[]): void {
     "replies",
     "url",
     "scraped_at",
+    "relevant",
+    "sentiment",
+    "topics",
+    "summary",
   ];
-  const cell = (review: Review, field: keyof Review) => {
+  const cell = (review: Review, field: (typeof fields)[number]) => {
     const value =
       field === "replies"
         ? review.replies.map((reply) => `${reply.author}: ${reply.text}`).join("\n---\n")
-        : review[field];
+        : field === "relevant" || field === "sentiment" || field === "summary"
+          ? review.analysis?.[field]
+          : field === "topics"
+            ? review.analysis?.topics.join("; ")
+            : review[field];
     return `"${String(value ?? "").replace(/"/g, '""')}"`;
   };
   const rows = [fields.join(","), ...reviews.map((review) => fields.map((f) => cell(review, f)).join(","))];
