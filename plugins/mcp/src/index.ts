@@ -16,7 +16,7 @@ import { openInBrowser, writeHtml } from "./scraper/view.js";
 
 const server = new McpServer({
   name: "narxoz-2gis",
-  version: "0.4.0",
+  version: "0.4.1",
 });
 
 const text = (value: string) => ({ content: [{ type: "text" as const, text: value }] });

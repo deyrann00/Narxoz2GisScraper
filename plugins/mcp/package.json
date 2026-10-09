@@ -1,6 +1,6 @@
 {
   "name": "narxoz-2gis-mcp",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "private": true,
   "type": "module",
   "description": "TypeScript MCP server for Narxoz 2GIS review scraping",

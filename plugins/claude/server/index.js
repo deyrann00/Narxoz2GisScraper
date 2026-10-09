@@ -34891,7 +34891,7 @@ function recentReviews(root, hours, limit, maxRating, sentiment, includeIrreleva
 // src/index.ts
 var server = new McpServer({
   name: "narxoz-2gis",
-  version: "0.4.0"
+  version: "0.4.1"
 });
 var text = (value) => ({ content: [{ type: "text", text: value }] });
 var json = (value) => text(JSON.stringify(value, null, 2));

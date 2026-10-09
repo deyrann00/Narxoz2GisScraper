@@ -117,6 +117,7 @@ SMTP_PASS=app-password
 ## Теги
 
 - `latest` — последняя версия
+- `0.4.1` — режим команд для cron (`run`, `analyze`, `email`)
 - `0.4.0` — LLM-анализ, разбивка по тональности, email
 
 Платформы: `linux/amd64`, `linux/arm64`.
