@@ -39,6 +39,15 @@ docker run -i --rm --env-file .env \
 }
 ```
 
+## Запуск по расписанию (cron)
+
+С аргументом контейнер выполняет одну задачу и завершается (`-i` не нужен): `run` — сбор, анализ и `index.html`, `run --email --hours 24` — плюс отчёт за сутки на почту, `analyze --force` — переклассифицировать архив, `email` — только письмо, `help` — справка. Код выхода `0` — успех, `1` — ошибка сбора или письма.
+
+```cron
+# каждый день в 09:00 — сбор и отчёт за сутки
+0 9 * * * docker run --rm --env-file /srv/narxoz/.env -v /srv/narxoz/data:/app/data -v /srv/narxoz/config.json:/app/config.json deyrann00/narxoz-2gis-scraper run --email --hours 24 >> /srv/narxoz/cron.log 2>&1
+```
+
 ## Переменные окружения
 
 | Переменная | Назначение | Обязательна |

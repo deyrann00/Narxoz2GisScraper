@@ -99,6 +99,43 @@ docker run -i --rm \
   deyrann00/narxoz-2gis-scraper
 ```
 
+## Запуск по расписанию (cron)
+
+Тот же сервер работает как одноразовая команда: с аргументом он выполняет задачу и завершается, без аргументов запускается MCP-сервер.
+
+```bash
+node plugins/claude/server/index.js run                       # сбор + LLM-анализ + index.html
+node plugins/claude/server/index.js run --email --hours 24    # то же и отчёт за сутки на почту
+node plugins/claude/server/index.js analyze --force           # переклассифицировать архив
+node plugins/claude/server/index.js email --to a@b.kz,c@d.kz  # только письмо
+node plugins/claude/server/index.js help
+```
+
+Для cron удобнее обёртка `scripts/cron.sh`. Она:
+- подгружает `.env` из корня репозитория;
+- находит `node` (Homebrew, `/usr/local`), путь можно задать через `NODE=`;
+- не запускает второй сбор, пока идёт первый;
+- дописывает вывод в `logs/cron-ГГГГ-ММ.log`.
+
+Код выхода: `0` — успех, `1` — сбор или письмо не удались.
+
+`crontab -e`:
+
+```cron
+# каждый день в 09:00 — сбор и отчёт за сутки
+0 9 * * *  /path/to/Narxoz2GisScraper/scripts/cron.sh run --email --hours 24
+# по понедельникам в 09:30 — недельный отчёт
+30 9 * * 1 /path/to/Narxoz2GisScraper/scripts/cron.sh email --hours 168
+```
+
+На macOS cron по умолчанию не может читать `~/Documents`. Дайте `/usr/sbin/cron` полный доступ к диску (Системные настройки → Конфиденциальность и безопасность → Доступ к диску) или держите репозиторий вне `~/Documents`.
+
+Через Docker аргументы передаются после имени образа (`-i` не нужен):
+
+```cron
+0 9 * * * docker run --rm --env-file /srv/narxoz/.env -v /srv/narxoz/data:/app/data -v /srv/narxoz/config.json:/app/config.json deyrann00/narxoz-2gis-scraper run --email --hours 24 >> /srv/narxoz/cron.log 2>&1
+```
+
 ## Инструменты MCP
 
 - `scrape_narxoz_2gis` — сбор (`full: true` — добрать старые отзывы)

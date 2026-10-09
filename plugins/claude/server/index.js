@@ -1360,12 +1360,12 @@ var require_errors = __commonJS({
       }
       return [E.schemaPath, schPath];
     }
-    function extraErrorProps(cxt, { params, message }, keyValues) {
+    function extraErrorProps(cxt, { params, message: message2 }, keyValues) {
       const { keyword, data, schemaValue, it } = cxt;
       const { opts, propertyName, topSchemaRef, schemaPath } = it;
       keyValues.push([E.keyword, keyword], [E.params, typeof params == "function" ? params(cxt) : params || (0, codegen_1._)`{}`]);
       if (opts.messages) {
-        keyValues.push([E.message, typeof message == "function" ? message(cxt) : message]);
+        keyValues.push([E.message, typeof message2 == "function" ? message2(cxt) : message2]);
       }
       if (opts.verbose) {
         keyValues.push([E.schema, schemaValue], [E.parentSchema, (0, codegen_1._)`${topSchemaRef}${schemaPath}`], [names_1.default.data, data]);
@@ -4495,11 +4495,11 @@ var require_core = __commonJS({
         }
         const valid = this.validate($schema, schema);
         if (!valid && throwOrLogError) {
-          const message = "schema is invalid: " + this.errorsText();
+          const message2 = "schema is invalid: " + this.errorsText();
           if (this.opts.validateSchema === "log")
-            this.logger.error(message);
+            this.logger.error(message2);
           else
-            throw new Error(message);
+            throw new Error(message2);
         }
         return valid;
       }
@@ -7561,104 +7561,104 @@ ZodError.create = (issues) => {
 
 // node_modules/zod/v3/locales/en.js
 var errorMap = (issue2, _ctx) => {
-  let message;
+  let message2;
   switch (issue2.code) {
     case ZodIssueCode.invalid_type:
       if (issue2.received === ZodParsedType.undefined) {
-        message = "Required";
+        message2 = "Required";
       } else {
-        message = `Expected ${issue2.expected}, received ${issue2.received}`;
+        message2 = `Expected ${issue2.expected}, received ${issue2.received}`;
       }
       break;
     case ZodIssueCode.invalid_literal:
-      message = `Invalid literal value, expected ${JSON.stringify(issue2.expected, util.jsonStringifyReplacer)}`;
+      message2 = `Invalid literal value, expected ${JSON.stringify(issue2.expected, util.jsonStringifyReplacer)}`;
       break;
     case ZodIssueCode.unrecognized_keys:
-      message = `Unrecognized key(s) in object: ${util.joinValues(issue2.keys, ", ")}`;
+      message2 = `Unrecognized key(s) in object: ${util.joinValues(issue2.keys, ", ")}`;
       break;
     case ZodIssueCode.invalid_union:
-      message = `Invalid input`;
+      message2 = `Invalid input`;
       break;
     case ZodIssueCode.invalid_union_discriminator:
-      message = `Invalid discriminator value. Expected ${util.joinValues(issue2.options)}`;
+      message2 = `Invalid discriminator value. Expected ${util.joinValues(issue2.options)}`;
       break;
     case ZodIssueCode.invalid_enum_value:
-      message = `Invalid enum value. Expected ${util.joinValues(issue2.options)}, received '${issue2.received}'`;
+      message2 = `Invalid enum value. Expected ${util.joinValues(issue2.options)}, received '${issue2.received}'`;
       break;
     case ZodIssueCode.invalid_arguments:
-      message = `Invalid function arguments`;
+      message2 = `Invalid function arguments`;
       break;
     case ZodIssueCode.invalid_return_type:
-      message = `Invalid function return type`;
+      message2 = `Invalid function return type`;
       break;
     case ZodIssueCode.invalid_date:
-      message = `Invalid date`;
+      message2 = `Invalid date`;
       break;
     case ZodIssueCode.invalid_string:
       if (typeof issue2.validation === "object") {
         if ("includes" in issue2.validation) {
-          message = `Invalid input: must include "${issue2.validation.includes}"`;
+          message2 = `Invalid input: must include "${issue2.validation.includes}"`;
           if (typeof issue2.validation.position === "number") {
-            message = `${message} at one or more positions greater than or equal to ${issue2.validation.position}`;
+            message2 = `${message2} at one or more positions greater than or equal to ${issue2.validation.position}`;
           }
         } else if ("startsWith" in issue2.validation) {
-          message = `Invalid input: must start with "${issue2.validation.startsWith}"`;
+          message2 = `Invalid input: must start with "${issue2.validation.startsWith}"`;
         } else if ("endsWith" in issue2.validation) {
-          message = `Invalid input: must end with "${issue2.validation.endsWith}"`;
+          message2 = `Invalid input: must end with "${issue2.validation.endsWith}"`;
         } else {
           util.assertNever(issue2.validation);
         }
       } else if (issue2.validation !== "regex") {
-        message = `Invalid ${issue2.validation}`;
+        message2 = `Invalid ${issue2.validation}`;
       } else {
-        message = "Invalid";
+        message2 = "Invalid";
       }
       break;
     case ZodIssueCode.too_small:
       if (issue2.type === "array")
-        message = `Array must contain ${issue2.exact ? "exactly" : issue2.inclusive ? `at least` : `more than`} ${issue2.minimum} element(s)`;
+        message2 = `Array must contain ${issue2.exact ? "exactly" : issue2.inclusive ? `at least` : `more than`} ${issue2.minimum} element(s)`;
       else if (issue2.type === "string")
-        message = `String must contain ${issue2.exact ? "exactly" : issue2.inclusive ? `at least` : `over`} ${issue2.minimum} character(s)`;
+        message2 = `String must contain ${issue2.exact ? "exactly" : issue2.inclusive ? `at least` : `over`} ${issue2.minimum} character(s)`;
       else if (issue2.type === "number")
-        message = `Number must be ${issue2.exact ? `exactly equal to ` : issue2.inclusive ? `greater than or equal to ` : `greater than `}${issue2.minimum}`;
+        message2 = `Number must be ${issue2.exact ? `exactly equal to ` : issue2.inclusive ? `greater than or equal to ` : `greater than `}${issue2.minimum}`;
       else if (issue2.type === "bigint")
-        message = `Number must be ${issue2.exact ? `exactly equal to ` : issue2.inclusive ? `greater than or equal to ` : `greater than `}${issue2.minimum}`;
+        message2 = `Number must be ${issue2.exact ? `exactly equal to ` : issue2.inclusive ? `greater than or equal to ` : `greater than `}${issue2.minimum}`;
       else if (issue2.type === "date")
-        message = `Date must be ${issue2.exact ? `exactly equal to ` : issue2.inclusive ? `greater than or equal to ` : `greater than `}${new Date(Number(issue2.minimum))}`;
+        message2 = `Date must be ${issue2.exact ? `exactly equal to ` : issue2.inclusive ? `greater than or equal to ` : `greater than `}${new Date(Number(issue2.minimum))}`;
       else
-        message = "Invalid input";
+        message2 = "Invalid input";
       break;
     case ZodIssueCode.too_big:
       if (issue2.type === "array")
-        message = `Array must contain ${issue2.exact ? `exactly` : issue2.inclusive ? `at most` : `less than`} ${issue2.maximum} element(s)`;
+        message2 = `Array must contain ${issue2.exact ? `exactly` : issue2.inclusive ? `at most` : `less than`} ${issue2.maximum} element(s)`;
       else if (issue2.type === "string")
-        message = `String must contain ${issue2.exact ? `exactly` : issue2.inclusive ? `at most` : `under`} ${issue2.maximum} character(s)`;
+        message2 = `String must contain ${issue2.exact ? `exactly` : issue2.inclusive ? `at most` : `under`} ${issue2.maximum} character(s)`;
       else if (issue2.type === "number")
-        message = `Number must be ${issue2.exact ? `exactly` : issue2.inclusive ? `less than or equal to` : `less than`} ${issue2.maximum}`;
+        message2 = `Number must be ${issue2.exact ? `exactly` : issue2.inclusive ? `less than or equal to` : `less than`} ${issue2.maximum}`;
       else if (issue2.type === "bigint")
-        message = `BigInt must be ${issue2.exact ? `exactly` : issue2.inclusive ? `less than or equal to` : `less than`} ${issue2.maximum}`;
+        message2 = `BigInt must be ${issue2.exact ? `exactly` : issue2.inclusive ? `less than or equal to` : `less than`} ${issue2.maximum}`;
       else if (issue2.type === "date")
-        message = `Date must be ${issue2.exact ? `exactly` : issue2.inclusive ? `smaller than or equal to` : `smaller than`} ${new Date(Number(issue2.maximum))}`;
+        message2 = `Date must be ${issue2.exact ? `exactly` : issue2.inclusive ? `smaller than or equal to` : `smaller than`} ${new Date(Number(issue2.maximum))}`;
       else
-        message = "Invalid input";
+        message2 = "Invalid input";
       break;
     case ZodIssueCode.custom:
-      message = `Invalid input`;
+      message2 = `Invalid input`;
       break;
     case ZodIssueCode.invalid_intersection_types:
-      message = `Intersection results could not be merged`;
+      message2 = `Intersection results could not be merged`;
       break;
     case ZodIssueCode.not_multiple_of:
-      message = `Number must be a multiple of ${issue2.multipleOf}`;
+      message2 = `Number must be a multiple of ${issue2.multipleOf}`;
       break;
     case ZodIssueCode.not_finite:
-      message = "Number must be finite";
+      message2 = "Number must be finite";
       break;
     default:
-      message = _ctx.defaultError;
+      message2 = _ctx.defaultError;
       util.assertNever(issue2);
   }
-  return { message };
+  return { message: message2 };
 };
 var en_default = errorMap;
 
@@ -7784,8 +7784,8 @@ var isAsync = (x) => typeof Promise !== "undefined" && x instanceof Promise;
 // node_modules/zod/v3/helpers/errorUtil.js
 var errorUtil;
 (function(errorUtil2) {
-  errorUtil2.errToObj = (message) => typeof message === "string" ? { message } : message || {};
-  errorUtil2.toString = (message) => typeof message === "string" ? message : message?.message;
+  errorUtil2.errToObj = (message2) => typeof message2 === "string" ? { message: message2 } : message2 || {};
+  errorUtil2.toString = (message2) => typeof message2 === "string" ? message2 : message2?.message;
 })(errorUtil || (errorUtil = {}));
 
 // node_modules/zod/v3/types.js
@@ -7837,16 +7837,16 @@ function processCreateParams(params) {
   if (errorMap2)
     return { errorMap: errorMap2, description };
   const customMap = (iss, ctx) => {
-    const { message } = params;
+    const { message: message2 } = params;
     if (iss.code === "invalid_enum_value") {
-      return { message: message ?? ctx.defaultError };
+      return { message: message2 ?? ctx.defaultError };
     }
     if (typeof ctx.data === "undefined") {
-      return { message: message ?? required_error ?? ctx.defaultError };
+      return { message: message2 ?? required_error ?? ctx.defaultError };
     }
     if (iss.code !== "invalid_type")
       return { message: ctx.defaultError };
-    return { message: message ?? invalid_type_error ?? ctx.defaultError };
+    return { message: message2 ?? invalid_type_error ?? ctx.defaultError };
   };
   return { errorMap: customMap, description };
 }
@@ -7972,14 +7972,14 @@ var ZodType = class {
     const result = await (isAsync(maybeAsyncResult) ? maybeAsyncResult : Promise.resolve(maybeAsyncResult));
     return handleResult(ctx, result);
   }
-  refine(check2, message) {
+  refine(check2, message2) {
     const getIssueProperties = (val) => {
-      if (typeof message === "string" || typeof message === "undefined") {
-        return { message };
-      } else if (typeof message === "function") {
-        return message(val);
+      if (typeof message2 === "string" || typeof message2 === "undefined") {
+        return { message: message2 };
+      } else if (typeof message2 === "function") {
+        return message2(val);
       } else {
-        return message;
+        return message2;
       }
     };
     return this._refinement((val, ctx) => {
@@ -8515,11 +8515,11 @@ var ZodString = class _ZodString2 extends ZodType {
     }
     return { status: status.value, value: input.data };
   }
-  _regex(regex, validation, message) {
+  _regex(regex, validation, message2) {
     return this.refinement((data) => regex.test(data), {
       validation,
       code: ZodIssueCode.invalid_string,
-      ...errorUtil.errToObj(message)
+      ...errorUtil.errToObj(message2)
     });
   }
   _addCheck(check2) {
@@ -8528,37 +8528,37 @@ var ZodString = class _ZodString2 extends ZodType {
       checks: [...this._def.checks, check2]
     });
   }
-  email(message) {
-    return this._addCheck({ kind: "email", ...errorUtil.errToObj(message) });
+  email(message2) {
+    return this._addCheck({ kind: "email", ...errorUtil.errToObj(message2) });
   }
-  url(message) {
-    return this._addCheck({ kind: "url", ...errorUtil.errToObj(message) });
+  url(message2) {
+    return this._addCheck({ kind: "url", ...errorUtil.errToObj(message2) });
   }
-  emoji(message) {
-    return this._addCheck({ kind: "emoji", ...errorUtil.errToObj(message) });
+  emoji(message2) {
+    return this._addCheck({ kind: "emoji", ...errorUtil.errToObj(message2) });
   }
-  uuid(message) {
-    return this._addCheck({ kind: "uuid", ...errorUtil.errToObj(message) });
+  uuid(message2) {
+    return this._addCheck({ kind: "uuid", ...errorUtil.errToObj(message2) });
   }
-  nanoid(message) {
-    return this._addCheck({ kind: "nanoid", ...errorUtil.errToObj(message) });
+  nanoid(message2) {
+    return this._addCheck({ kind: "nanoid", ...errorUtil.errToObj(message2) });
   }
-  cuid(message) {
-    return this._addCheck({ kind: "cuid", ...errorUtil.errToObj(message) });
+  cuid(message2) {
+    return this._addCheck({ kind: "cuid", ...errorUtil.errToObj(message2) });
   }
-  cuid2(message) {
-    return this._addCheck({ kind: "cuid2", ...errorUtil.errToObj(message) });
+  cuid2(message2) {
+    return this._addCheck({ kind: "cuid2", ...errorUtil.errToObj(message2) });
   }
-  ulid(message) {
-    return this._addCheck({ kind: "ulid", ...errorUtil.errToObj(message) });
+  ulid(message2) {
+    return this._addCheck({ kind: "ulid", ...errorUtil.errToObj(message2) });
   }
-  base64(message) {
-    return this._addCheck({ kind: "base64", ...errorUtil.errToObj(message) });
+  base64(message2) {
+    return this._addCheck({ kind: "base64", ...errorUtil.errToObj(message2) });
   }
-  base64url(message) {
+  base64url(message2) {
     return this._addCheck({
       kind: "base64url",
-      ...errorUtil.errToObj(message)
+      ...errorUtil.errToObj(message2)
     });
   }
   jwt(options) {
@@ -8588,8 +8588,8 @@ var ZodString = class _ZodString2 extends ZodType {
       ...errorUtil.errToObj(options?.message)
     });
   }
-  date(message) {
-    return this._addCheck({ kind: "date", message });
+  date(message2) {
+    return this._addCheck({ kind: "date", message: message2 });
   }
   time(options) {
     if (typeof options === "string") {
@@ -8605,14 +8605,14 @@ var ZodString = class _ZodString2 extends ZodType {
       ...errorUtil.errToObj(options?.message)
     });
   }
-  duration(message) {
-    return this._addCheck({ kind: "duration", ...errorUtil.errToObj(message) });
+  duration(message2) {
+    return this._addCheck({ kind: "duration", ...errorUtil.errToObj(message2) });
   }
-  regex(regex, message) {
+  regex(regex, message2) {
     return this._addCheck({
       kind: "regex",
       regex,
-      ...errorUtil.errToObj(message)
+      ...errorUtil.errToObj(message2)
     });
   }
   includes(value, options) {
@@ -8623,46 +8623,46 @@ var ZodString = class _ZodString2 extends ZodType {
       ...errorUtil.errToObj(options?.message)
     });
   }
-  startsWith(value, message) {
+  startsWith(value, message2) {
     return this._addCheck({
       kind: "startsWith",
       value,
-      ...errorUtil.errToObj(message)
+      ...errorUtil.errToObj(message2)
     });
   }
-  endsWith(value, message) {
+  endsWith(value, message2) {
     return this._addCheck({
       kind: "endsWith",
       value,
-      ...errorUtil.errToObj(message)
+      ...errorUtil.errToObj(message2)
     });
   }
-  min(minLength, message) {
+  min(minLength, message2) {
     return this._addCheck({
       kind: "min",
       value: minLength,
-      ...errorUtil.errToObj(message)
+      ...errorUtil.errToObj(message2)
     });
   }
-  max(maxLength, message) {
+  max(maxLength, message2) {
     return this._addCheck({
       kind: "max",
       value: maxLength,
-      ...errorUtil.errToObj(message)
+      ...errorUtil.errToObj(message2)
     });
   }
-  length(len, message) {
+  length(len, message2) {
     return this._addCheck({
       kind: "length",
       value: len,
-      ...errorUtil.errToObj(message)
+      ...errorUtil.errToObj(message2)
     });
   }
   /**
    * Equivalent to `.min(1)`
    */
-  nonempty(message) {
-    return this.min(1, errorUtil.errToObj(message));
+  nonempty(message2) {
+    return this.min(1, errorUtil.errToObj(message2));
   }
   trim() {
     return new _ZodString2({
@@ -8855,19 +8855,19 @@ var ZodNumber = class _ZodNumber extends ZodType {
     }
     return { status: status.value, value: input.data };
   }
-  gte(value, message) {
-    return this.setLimit("min", value, true, errorUtil.toString(message));
+  gte(value, message2) {
+    return this.setLimit("min", value, true, errorUtil.toString(message2));
   }
-  gt(value, message) {
-    return this.setLimit("min", value, false, errorUtil.toString(message));
+  gt(value, message2) {
+    return this.setLimit("min", value, false, errorUtil.toString(message2));
   }
-  lte(value, message) {
-    return this.setLimit("max", value, true, errorUtil.toString(message));
+  lte(value, message2) {
+    return this.setLimit("max", value, true, errorUtil.toString(message2));
   }
-  lt(value, message) {
-    return this.setLimit("max", value, false, errorUtil.toString(message));
+  lt(value, message2) {
+    return this.setLimit("max", value, false, errorUtil.toString(message2));
   }
-  setLimit(kind, value, inclusive, message) {
+  setLimit(kind, value, inclusive, message2) {
     return new _ZodNumber({
       ...this._def,
       checks: [
@@ -8876,7 +8876,7 @@ var ZodNumber = class _ZodNumber extends ZodType {
           kind,
           value,
           inclusive,
-          message: errorUtil.toString(message)
+          message: errorUtil.toString(message2)
         }
       ]
     });
@@ -8887,68 +8887,68 @@ var ZodNumber = class _ZodNumber extends ZodType {
       checks: [...this._def.checks, check2]
     });
   }
-  int(message) {
+  int(message2) {
     return this._addCheck({
       kind: "int",
-      message: errorUtil.toString(message)
+      message: errorUtil.toString(message2)
     });
   }
-  positive(message) {
+  positive(message2) {
     return this._addCheck({
       kind: "min",
       value: 0,
       inclusive: false,
-      message: errorUtil.toString(message)
+      message: errorUtil.toString(message2)
     });
   }
-  negative(message) {
+  negative(message2) {
     return this._addCheck({
       kind: "max",
       value: 0,
       inclusive: false,
-      message: errorUtil.toString(message)
+      message: errorUtil.toString(message2)
     });
   }
-  nonpositive(message) {
+  nonpositive(message2) {
     return this._addCheck({
       kind: "max",
       value: 0,
       inclusive: true,
-      message: errorUtil.toString(message)
+      message: errorUtil.toString(message2)
     });
   }
-  nonnegative(message) {
+  nonnegative(message2) {
     return this._addCheck({
       kind: "min",
       value: 0,
       inclusive: true,
-      message: errorUtil.toString(message)
+      message: errorUtil.toString(message2)
     });
   }
-  multipleOf(value, message) {
+  multipleOf(value, message2) {
     return this._addCheck({
       kind: "multipleOf",
       value,
-      message: errorUtil.toString(message)
+      message: errorUtil.toString(message2)
     });
   }
-  finite(message) {
+  finite(message2) {
     return this._addCheck({
       kind: "finite",
-      message: errorUtil.toString(message)
+      message: errorUtil.toString(message2)
     });
   }
-  safe(message) {
+  safe(message2) {
     return this._addCheck({
       kind: "min",
       inclusive: true,
       value: Number.MIN_SAFE_INTEGER,
-      message: errorUtil.toString(message)
+      message: errorUtil.toString(message2)
     })._addCheck({
       kind: "max",
       inclusive: true,
       value: Number.MAX_SAFE_INTEGER,
-      message: errorUtil.toString(message)
+      message: errorUtil.toString(message2)
     });
   }
   get minValue() {
@@ -9071,19 +9071,19 @@ var ZodBigInt = class _ZodBigInt extends ZodType {
     });
     return INVALID;
   }
-  gte(value, message) {
-    return this.setLimit("min", value, true, errorUtil.toString(message));
+  gte(value, message2) {
+    return this.setLimit("min", value, true, errorUtil.toString(message2));
   }
-  gt(value, message) {
-    return this.setLimit("min", value, false, errorUtil.toString(message));
+  gt(value, message2) {
+    return this.setLimit("min", value, false, errorUtil.toString(message2));
   }
-  lte(value, message) {
-    return this.setLimit("max", value, true, errorUtil.toString(message));
+  lte(value, message2) {
+    return this.setLimit("max", value, true, errorUtil.toString(message2));
   }
-  lt(value, message) {
-    return this.setLimit("max", value, false, errorUtil.toString(message));
+  lt(value, message2) {
+    return this.setLimit("max", value, false, errorUtil.toString(message2));
   }
-  setLimit(kind, value, inclusive, message) {
+  setLimit(kind, value, inclusive, message2) {
     return new _ZodBigInt({
       ...this._def,
       checks: [
@@ -9092,7 +9092,7 @@ var ZodBigInt = class _ZodBigInt extends ZodType {
           kind,
           value,
           inclusive,
-          message: errorUtil.toString(message)
+          message: errorUtil.toString(message2)
         }
       ]
     });
@@ -9103,43 +9103,43 @@ var ZodBigInt = class _ZodBigInt extends ZodType {
       checks: [...this._def.checks, check2]
     });
   }
-  positive(message) {
+  positive(message2) {
     return this._addCheck({
       kind: "min",
       value: BigInt(0),
       inclusive: false,
-      message: errorUtil.toString(message)
+      message: errorUtil.toString(message2)
     });
   }
-  negative(message) {
+  negative(message2) {
     return this._addCheck({
       kind: "max",
       value: BigInt(0),
       inclusive: false,
-      message: errorUtil.toString(message)
+      message: errorUtil.toString(message2)
     });
   }
-  nonpositive(message) {
+  nonpositive(message2) {
     return this._addCheck({
       kind: "max",
       value: BigInt(0),
       inclusive: true,
-      message: errorUtil.toString(message)
+      message: errorUtil.toString(message2)
     });
   }
-  nonnegative(message) {
+  nonnegative(message2) {
     return this._addCheck({
       kind: "min",
       value: BigInt(0),
       inclusive: true,
-      message: errorUtil.toString(message)
+      message: errorUtil.toString(message2)
     });
   }
-  multipleOf(value, message) {
+  multipleOf(value, message2) {
     return this._addCheck({
       kind: "multipleOf",
       value,
-      message: errorUtil.toString(message)
+      message: errorUtil.toString(message2)
     });
   }
   get minValue() {
@@ -9262,18 +9262,18 @@ var ZodDate = class _ZodDate extends ZodType {
       checks: [...this._def.checks, check2]
     });
   }
-  min(minDate, message) {
+  min(minDate, message2) {
     return this._addCheck({
       kind: "min",
       value: minDate.getTime(),
-      message: errorUtil.toString(message)
+      message: errorUtil.toString(message2)
     });
   }
-  max(maxDate, message) {
+  max(maxDate, message2) {
     return this._addCheck({
       kind: "max",
       value: maxDate.getTime(),
-      message: errorUtil.toString(message)
+      message: errorUtil.toString(message2)
     });
   }
   get minDate() {
@@ -9505,26 +9505,26 @@ var ZodArray = class _ZodArray extends ZodType {
   get element() {
     return this._def.type;
   }
-  min(minLength, message) {
+  min(minLength, message2) {
     return new _ZodArray({
       ...this._def,
-      minLength: { value: minLength, message: errorUtil.toString(message) }
+      minLength: { value: minLength, message: errorUtil.toString(message2) }
     });
   }
-  max(maxLength, message) {
+  max(maxLength, message2) {
     return new _ZodArray({
       ...this._def,
-      maxLength: { value: maxLength, message: errorUtil.toString(message) }
+      maxLength: { value: maxLength, message: errorUtil.toString(message2) }
     });
   }
-  length(len, message) {
+  length(len, message2) {
     return new _ZodArray({
       ...this._def,
-      exactLength: { value: len, message: errorUtil.toString(message) }
+      exactLength: { value: len, message: errorUtil.toString(message2) }
     });
   }
-  nonempty(message) {
-    return this.min(1, message);
+  nonempty(message2) {
+    return this.min(1, message2);
   }
 };
 ZodArray.create = (schema, params) => {
@@ -9667,17 +9667,17 @@ var ZodObject = class _ZodObject extends ZodType {
   get shape() {
     return this._def.shape();
   }
-  strict(message) {
+  strict(message2) {
     errorUtil.errToObj;
     return new _ZodObject({
       ...this._def,
       unknownKeys: "strict",
-      ...message !== void 0 ? {
+      ...message2 !== void 0 ? {
         errorMap: (issue2, ctx) => {
           const defaultError = this._def.errorMap?.(issue2, ctx).message ?? ctx.defaultError;
           if (issue2.code === "unrecognized_keys")
             return {
-              message: errorUtil.errToObj(message).message ?? defaultError
+              message: errorUtil.errToObj(message2).message ?? defaultError
             };
           return {
             message: defaultError
@@ -10433,23 +10433,23 @@ var ZodSet = class _ZodSet extends ZodType {
       return finalizeSet(elements);
     }
   }
-  min(minSize, message) {
+  min(minSize, message2) {
     return new _ZodSet({
       ...this._def,
-      minSize: { value: minSize, message: errorUtil.toString(message) }
+      minSize: { value: minSize, message: errorUtil.toString(message2) }
     });
   }
-  max(maxSize, message) {
+  max(maxSize, message2) {
     return new _ZodSet({
       ...this._def,
-      maxSize: { value: maxSize, message: errorUtil.toString(message) }
+      maxSize: { value: maxSize, message: errorUtil.toString(message2) }
     });
   }
-  size(size, message) {
-    return this.min(size, message).max(size, message);
+  size(size, message2) {
+    return this.min(size, message2).max(size, message2);
   }
-  nonempty(message) {
-    return this.min(1, message);
+  nonempty(message2) {
+    return this.min(1, message2);
   }
 };
 ZodSet.create = (valueType, params) => {
@@ -11763,14 +11763,14 @@ function prefixIssues(path3, issues) {
     return iss;
   });
 }
-function unwrapMessage(message) {
-  return typeof message === "string" ? message : message?.message;
+function unwrapMessage(message2) {
+  return typeof message2 === "string" ? message2 : message2?.message;
 }
 function finalizeIssue(iss, ctx, config2) {
   const full = { ...iss, path: iss.path ?? [] };
   if (!iss.message) {
-    const message = unwrapMessage(iss.inst?._zod.def?.error?.(iss)) ?? unwrapMessage(ctx?.error?.(iss)) ?? unwrapMessage(config2.customError?.(iss)) ?? unwrapMessage(config2.localeError?.(iss)) ?? "Invalid input";
-    full.message = message;
+    const message2 = unwrapMessage(iss.inst?._zod.def?.error?.(iss)) ?? unwrapMessage(ctx?.error?.(iss)) ?? unwrapMessage(config2.customError?.(iss)) ?? unwrapMessage(config2.localeError?.(iss)) ?? "Invalid input";
+    full.message = message2;
   }
   delete full.inst;
   delete full.continue;
@@ -17444,8 +17444,8 @@ var ServerResultSchema = union([
   CreateTaskResultSchema
 ]);
 var McpError = class _McpError extends Error {
-  constructor(code, message, data) {
-    super(`MCP error ${code}: ${message}`);
+  constructor(code, message2, data) {
+    super(`MCP error ${code}: ${message2}`);
     this.code = code;
     this.data = data;
     this.name = "McpError";
@@ -17453,19 +17453,19 @@ var McpError = class _McpError extends Error {
   /**
    * Factory method to create the appropriate error type based on the error code and data
    */
-  static fromError(code, message, data) {
+  static fromError(code, message2, data) {
     if (code === ErrorCode.UrlElicitationRequired && data) {
       const errorData = data;
       if (errorData.elicitations) {
-        return new UrlElicitationRequiredError(errorData.elicitations, message);
+        return new UrlElicitationRequiredError(errorData.elicitations, message2);
       }
     }
-    return new _McpError(code, message, data);
+    return new _McpError(code, message2, data);
   }
 };
 var UrlElicitationRequiredError = class extends McpError {
-  constructor(elicitations, message = `URL elicitation${elicitations.length > 1 ? "s" : ""} required`) {
-    super(ErrorCode.UrlElicitationRequired, message, {
+  constructor(elicitations, message2 = `URL elicitation${elicitations.length > 1 ? "s" : ""} required`) {
+    super(ErrorCode.UrlElicitationRequired, message2, {
       elicitations
     });
   }
@@ -17998,7 +17998,7 @@ function escapeNonAlphaNumeric(source) {
   }
   return result;
 }
-function addFormat(schema, value, message, refs) {
+function addFormat(schema, value, message2, refs) {
   if (schema.format || schema.anyOf?.some((x) => x.format)) {
     if (!schema.anyOf) {
       schema.anyOf = [];
@@ -18020,13 +18020,13 @@ function addFormat(schema, value, message, refs) {
     }
     schema.anyOf.push({
       format: value,
-      ...message && refs.errorMessages && { errorMessage: { format: message } }
+      ...message2 && refs.errorMessages && { errorMessage: { format: message2 } }
     });
   } else {
-    setResponseValueAndErrors(schema, "format", value, message, refs);
+    setResponseValueAndErrors(schema, "format", value, message2, refs);
   }
 }
-function addPattern(schema, regex, message, refs) {
+function addPattern(schema, regex, message2, refs) {
   if (schema.pattern || schema.allOf?.some((x) => x.pattern)) {
     if (!schema.allOf) {
       schema.allOf = [];
@@ -18048,10 +18048,10 @@ function addPattern(schema, regex, message, refs) {
     }
     schema.allOf.push({
       pattern: stringifyRegExpWithFlags(regex, refs),
-      ...message && refs.errorMessages && { errorMessage: { pattern: message } }
+      ...message2 && refs.errorMessages && { errorMessage: { pattern: message2 } }
     });
   } else {
-    setResponseValueAndErrors(schema, "pattern", stringifyRegExpWithFlags(regex, refs), message, refs);
+    setResponseValueAndErrors(schema, "pattern", stringifyRegExpWithFlags(regex, refs), message2, refs);
   }
 }
 function stringifyRegExpWithFlags(regex, refs) {
@@ -18850,15 +18850,15 @@ var Protocol = class {
             let queuedMessage;
             while (queuedMessage = await this._taskMessageQueue.dequeue(taskId, extra.sessionId)) {
               if (queuedMessage.type === "response" || queuedMessage.type === "error") {
-                const message = queuedMessage.message;
-                const requestId = message.id;
+                const message2 = queuedMessage.message;
+                const requestId = message2.id;
                 const resolver = this._requestResolvers.get(requestId);
                 if (resolver) {
                   this._requestResolvers.delete(requestId);
                   if (queuedMessage.type === "response") {
-                    resolver(message);
+                    resolver(message2);
                   } else {
-                    const errorMessage = message;
+                    const errorMessage = message2;
                     const error3 = new McpError(errorMessage.error.code, errorMessage.error.message, errorMessage.error.data);
                     resolver(error3);
                   }
@@ -18981,11 +18981,11 @@ var Protocol = class {
    *
    * The Protocol object assumes ownership of the Transport, replacing any callbacks that have already been set, and expects that it is the only user of the Transport instance going forward.
    */
-  async connect(transport2) {
+  async connect(transport) {
     if (this._transport) {
       throw new Error("Already connected to a transport. Call close() before connecting to a new transport, or use a separate Protocol instance per connection.");
     }
-    this._transport = transport2;
+    this._transport = transport;
     const _onclose = this.transport?.onclose;
     this._transport.onclose = () => {
       _onclose?.();
@@ -18997,16 +18997,16 @@ var Protocol = class {
       this._onerror(error3);
     };
     const _onmessage = this._transport?.onmessage;
-    this._transport.onmessage = (message, extra) => {
-      _onmessage?.(message, extra);
-      if (isJSONRPCResultResponse(message) || isJSONRPCErrorResponse(message)) {
-        this._onresponse(message);
-      } else if (isJSONRPCRequest(message)) {
-        this._onrequest(message, extra);
-      } else if (isJSONRPCNotification(message)) {
-        this._onnotification(message);
+    this._transport.onmessage = (message2, extra) => {
+      _onmessage?.(message2, extra);
+      if (isJSONRPCResultResponse(message2) || isJSONRPCErrorResponse(message2)) {
+        this._onresponse(message2);
+      } else if (isJSONRPCRequest(message2)) {
+        this._onrequest(message2, extra);
+      } else if (isJSONRPCNotification(message2)) {
+        this._onnotification(message2);
       } else {
-        this._onerror(new Error(`Unknown message type: ${JSON.stringify(message)}`));
+        this._onerror(new Error(`Unknown message type: ${JSON.stringify(message2)}`));
       }
     };
     await this._transport.start();
@@ -19616,12 +19616,12 @@ var Protocol = class {
    * the error appropriately (e.g., by failing the task, logging, etc.). The Protocol layer
    * simply propagates the error.
    */
-  async _enqueueTaskMessage(taskId, message, sessionId) {
+  async _enqueueTaskMessage(taskId, message2, sessionId) {
     if (!this._taskStore || !this._taskMessageQueue) {
       throw new Error("Cannot enqueue task message: taskStore and taskMessageQueue are not configured");
     }
     const maxQueueSize = this._options?.maxTaskQueueSize;
-    await this._taskMessageQueue.enqueue(taskId, message, sessionId, maxQueueSize);
+    await this._taskMessageQueue.enqueue(taskId, message2, sessionId, maxQueueSize);
   }
   /**
    * Clears the message queue for a task and rejects any pending request resolvers.
@@ -19631,9 +19631,9 @@ var Protocol = class {
   async _clearTaskQueue(taskId, sessionId) {
     if (this._taskMessageQueue) {
       const messages = await this._taskMessageQueue.dequeueAll(taskId, sessionId);
-      for (const message of messages) {
-        if (message.type === "request" && isJSONRPCRequest(message.message)) {
-          const requestId = message.message.id;
+      for (const message2 of messages) {
+        if (message2.type === "request" && isJSONRPCRequest(message2.message)) {
+          const requestId = message2.message.id;
           const resolver = this._requestResolvers.get(requestId);
           if (resolver) {
             resolver(new McpError(ErrorCode.InternalError, "Task cancelled or completed"));
@@ -20566,8 +20566,8 @@ var McpServer = class {
    *
    * The `server` object assumes ownership of the Transport, replacing any callbacks that have already been set, and expects that it is the only user of the Transport instance going forward.
    */
-  async connect(transport2) {
-    return await this.server.connect(transport2);
+  async connect(transport) {
+    return await this.server.connect(transport);
   }
   /**
    * Closes the connection.
@@ -21361,8 +21361,8 @@ var ReadBuffer = class {
 function deserializeMessage(line) {
   return JSONRPCMessageSchema.parse(JSON.parse(line));
 }
-function serializeMessage(message) {
-  return JSON.stringify(message) + "\n";
+function serializeMessage(message2) {
+  return JSON.stringify(message2) + "\n";
 }
 
 // node_modules/@modelcontextprotocol/sdk/dist/esm/server/stdio.js
@@ -21400,11 +21400,11 @@ var StdioServerTransport = class {
   processReadBuffer() {
     while (true) {
       try {
-        const message = this._readBuffer.readMessage();
-        if (message === null) {
+        const message2 = this._readBuffer.readMessage();
+        if (message2 === null) {
           break;
         }
-        this.onmessage?.(message);
+        this.onmessage?.(message2);
       } catch (error3) {
         this.onerror?.(error3);
       }
@@ -21420,9 +21420,9 @@ var StdioServerTransport = class {
     this._readBuffer.clear();
     this.onclose?.();
   }
-  send(message) {
+  send(message2) {
     return new Promise((resolve4) => {
-      const json2 = serializeMessage(message);
+      const json2 = serializeMessage(message2);
       if (this._stdout.write(json2)) {
         resolve4();
       } else {
@@ -21487,9 +21487,8 @@ function reviewsPath(root) {
   return join(root, "data", "reviews.jsonl");
 }
 
-// src/scraper/store.ts
-import { existsSync as existsSync3, readFileSync as readFileSync2, writeFileSync as writeFileSync2 } from "node:fs";
-import { join as join3 } from "node:path";
+// src/scraper/analyze.ts
+import { createHash } from "node:crypto";
 
 // src/scraper/config.ts
 import { existsSync as existsSync2, mkdirSync as mkdirSync2, readFileSync, writeFileSync } from "node:fs";
@@ -21558,6 +21557,8 @@ function loadConfig(root = scraperRoot()) {
 }
 
 // src/scraper/store.ts
+import { existsSync as existsSync3, readFileSync as readFileSync2, writeFileSync as writeFileSync2 } from "node:fs";
+import { join as join3 } from "node:path";
 function upgrade(item) {
   if (Array.isArray(item.replies)) {
     return item;
@@ -21664,208 +21665,9 @@ function lookbackReviews(reviews, hours) {
   });
 }
 
-// src/reviews.ts
-function recentReviews(root, hours, limit, maxRating, sentiment, includeIrrelevant = false) {
-  const cap = Math.max(1, Math.min(limit, 200));
-  let [reviews] = mergeReviews(loadExisting(root), []);
-  if (hours > 0) {
-    reviews = lookbackReviews(reviews, hours);
-  }
-  if (maxRating !== void 0) {
-    reviews = reviews.filter((review) => review.rating !== null && review.rating <= maxRating);
-  }
-  if (!includeIrrelevant) {
-    reviews = reviews.filter((review) => review.analysis?.relevant !== false);
-  }
-  if (sentiment) {
-    reviews = reviews.filter((review) => review.analysis?.sentiment === sentiment);
-  }
-  return reviews.slice(0, cap).map((review) => ({
-    id: review.id,
-    branch: review.branch_name,
-    branch_address: review.branch_address,
-    rating: review.rating,
-    author: review.author,
-    text: review.text,
-    url: review.url,
-    published_at: review.published_at,
-    edited_at: review.edited_at ?? null,
-    likes_count: review.likes_count ?? 0,
-    photos_count: review.photos_count ?? 0,
-    replies_count: review.replies_count,
-    replies: review.replies,
-    relevant: review.analysis?.relevant ?? null,
-    sentiment: review.analysis?.sentiment ?? null,
-    topics: review.analysis?.topics ?? [],
-    summary: review.analysis?.summary ?? ""
-  }));
-}
-
-// src/scraper/http.ts
-var USER_AGENT = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36";
-var TIMEOUT_MS = 3e4;
-async function get(url, accept) {
-  const response = await fetch(url, {
-    headers: {
-      "User-Agent": USER_AGENT,
-      "Accept-Language": "ru-RU,ru;q=0.9",
-      Accept: accept
-    },
-    signal: AbortSignal.timeout(TIMEOUT_MS)
-  });
-  if (!response.ok) {
-    throw new Error(`HTTP ${response.status} for ${url}`);
-  }
-  return response;
-}
-async function fetchText(url) {
-  return (await get(url, "text/html")).text();
-}
-async function fetchJson(url) {
-  return await (await get(url, "application/json")).json();
-}
-var sleep = (ms) => new Promise((resolve4) => setTimeout(resolve4, ms));
-
-// src/scraper/branches.ts
-var STATE_MARKER = "initialState = JSON.parse('";
-var ESCAPES = { n: "\n", r: "\r", t: "	", b: "\b", f: "\f" };
-function branchId(value) {
-  const raw = String(value).trim();
-  if (/^\d{6,}$/.test(raw)) {
-    return raw;
-  }
-  return /\/firm\/(\d{6,})/.exec(raw)?.[1];
-}
-function branchUrl(cfg, id) {
-  return `https://${cfg.domain}/${cfg.city}/firm/${id}`;
-}
-function readJsString(html, start) {
-  const out = [];
-  let i = start;
-  let chunk = start;
-  while (i < html.length) {
-    const ch = html[i];
-    if (ch === "'") {
-      out.push(html.slice(chunk, i));
-      return out.join("");
-    }
-    if (ch !== "\\") {
-      i += 1;
-      continue;
-    }
-    out.push(html.slice(chunk, i));
-    const next = html[i + 1];
-    if (next === "u") {
-      out.push(String.fromCharCode(parseInt(html.slice(i + 2, i + 6), 16)));
-      i += 6;
-    } else if (next === "x") {
-      out.push(String.fromCharCode(parseInt(html.slice(i + 2, i + 4), 16)));
-      i += 4;
-    } else {
-      out.push(ESCAPES[next] ?? next);
-      i += 2;
-    }
-    chunk = i;
-  }
-  throw new Error("2GIS page state is not terminated");
-}
-function pageBranches(html, cfg) {
-  const at = html.indexOf(STATE_MARKER);
-  if (at < 0) {
-    throw new Error("2GIS page has no initialState (layout changed or request was blocked)");
-  }
-  const state = JSON.parse(readJsString(html, at + STATE_MARKER.length));
-  const profiles = state?.data?.entity?.profile ?? {};
-  const branches = [];
-  for (const [id, entry] of Object.entries(profiles)) {
-    const data = entry?.data;
-    if (!data || data.type !== "branch") {
-      continue;
-    }
-    branches.push({
-      id,
-      name: String(data.name || ""),
-      address: String(data.address_name || ""),
-      org_id: String(data.org?.id || ""),
-      rubrics: Array.isArray(data.rubrics) ? data.rubrics.map((r) => String(r?.name || "")).filter(Boolean) : [],
-      rating: typeof data.reviews?.general_rating === "number" ? data.reviews.general_rating : null,
-      reviews_count: typeof data.reviews?.general_review_count === "number" ? data.reviews.general_review_count : null,
-      url: branchUrl(cfg, id)
-    });
-  }
-  return branches;
-}
-function pageApiKey(html) {
-  return /"reviewApiKey":"([0-9a-f-]{20,})"/.exec(html)?.[1];
-}
-function ids(values) {
-  return new Set(values.map(branchId).filter((id) => Boolean(id)));
-}
-async function discoverBranches(cfg) {
-  const errors2 = [];
-  const candidates = /* @__PURE__ */ new Map();
-  let apiKey;
-  for (const query of cfg.queries) {
-    const url = `https://${cfg.domain}/${cfg.city}/search/${encodeURIComponent(query)}`;
-    try {
-      const html = await fetchText(url);
-      apiKey ??= pageApiKey(html);
-      for (const branch of pageBranches(html, cfg)) {
-        candidates.set(branch.id, branch);
-      }
-    } catch (err) {
-      errors2.push(`Search "${query}" failed: ${err instanceof Error ? err.message : String(err)}`);
-    }
-  }
-  const filters = cfg.name_filters.map((f) => f.toLowerCase().trim()).filter(Boolean);
-  const named = [...candidates.values()].filter(
-    (branch) => !filters.length || filters.some((f) => branch.name.toLowerCase().includes(f))
-  );
-  const orgs = new Set(named.map((branch) => branch.org_id).filter(Boolean));
-  const tracked = /* @__PURE__ */ new Map();
-  for (const branch of candidates.values()) {
-    if (named.includes(branch) || orgs.has(branch.org_id)) {
-      tracked.set(branch.id, branch);
-    }
-  }
-  for (const id of ids(cfg.branches)) {
-    if (tracked.has(id)) {
-      continue;
-    }
-    let found = candidates.get(id);
-    if (!found) {
-      try {
-        const html = await fetchText(branchUrl(cfg, id));
-        apiKey ??= pageApiKey(html);
-        found = pageBranches(html, cfg).find((branch) => branch.id === id);
-      } catch (err) {
-        errors2.push(`Branch ${id} lookup failed: ${err instanceof Error ? err.message : String(err)}`);
-      }
-    }
-    tracked.set(
-      id,
-      found ?? {
-        id,
-        name: id,
-        address: "",
-        org_id: "",
-        rubrics: [],
-        rating: null,
-        reviews_count: null,
-        url: branchUrl(cfg, id)
-      }
-    );
-  }
-  for (const id of ids(cfg.exclude_branches)) {
-    tracked.delete(id);
-  }
-  return { branches: [...tracked.values()], apiKey, errors: errors2 };
-}
-
 // src/scraper/analyze.ts
-import { createHash } from "node:crypto";
 var FALLBACK_MODEL = "rating-fallback";
-var TIMEOUT_MS2 = 12e4;
+var TIMEOUT_MS = 12e4;
 var CONCURRENCY = 4;
 var MAX_TEXT = 2e3;
 var DEFAULT_RELEVANCE = [
@@ -21964,7 +21766,7 @@ async function classifyBatch(llm, key, batch) {
         { role: "user", content: userPrompt(batch) }
       ]
     }),
-    signal: AbortSignal.timeout(TIMEOUT_MS2)
+    signal: AbortSignal.timeout(TIMEOUT_MS)
   });
   const body = await response.text();
   if (!response.ok) {
@@ -23182,7 +22984,7 @@ var parseConnectionUrl = (str) => {
   });
   return options;
 };
-var _logFunc = (logger, level, defaults, data, message, ...args) => {
+var _logFunc = (logger, level, defaults, data, message2, ...args) => {
   const entry = Object.assign({}, defaults || {}, data || {});
   delete entry.level;
   let logLevel = level;
@@ -23190,7 +22992,7 @@ var _logFunc = (logger, level, defaults, data, message, ...args) => {
     logLevel = ["info", "debug", "log", "trace", "warn", "error"].find((name2) => typeof logger[name2] === "function");
   }
   if (logLevel) {
-    logger[logLevel](entry, message, ...args);
+    logger[logLevel](entry, message2, ...args);
   }
 };
 var getLogger = (options, defaults) => {
@@ -23415,7 +23217,7 @@ function createDefaultLogger(levels) {
     }
     levelNames.set(level, levelName);
   });
-  const print = (level, entry, message, ...args) => {
+  const print2 = (level, entry, message2, ...args) => {
     let prefix = "";
     if (entry) {
       if (entry.tnx === "server") {
@@ -23430,14 +23232,14 @@ function createDefaultLogger(levels) {
         prefix = "[#" + entry.cid + "] " + prefix;
       }
     }
-    message = util2.format(message, ...args);
-    message.split(/\r?\n/).forEach((line) => {
+    message2 = util2.format(message2, ...args);
+    message2.split(/\r?\n/).forEach((line) => {
       console.log("[%s] %s %s", (/* @__PURE__ */ new Date()).toISOString().substr(0, 19).replace(/T/, " "), levelNames.get(level), prefix + line);
     });
   };
   const logger = {};
   levels.forEach((level) => {
-    logger[level] = print.bind(null, level);
+    logger[level] = print2.bind(null, level);
   });
   return logger;
 }
@@ -30270,7 +30072,7 @@ var SMTPConnection = class extends EventEmitter2 {
    * @param message String, Buffer or a Stream
    * @param done Callback to return once sending is completed
    */
-  send(envelope, message, done) {
+  send(envelope, message2, done) {
     let returned = false;
     const callback = (err, info) => {
       if (returned) {
@@ -30282,7 +30084,7 @@ var SMTPConnection = class extends EventEmitter2 {
       }
       done(err, info);
     };
-    if (!message) {
+    if (!message2) {
       return callback(this._formatError("Empty message", "EMESSAGE", false, "API"));
     }
     const isDestroyedMessage = this._isDestroyedMessage("send message");
@@ -30300,8 +30102,8 @@ var SMTPConnection = class extends EventEmitter2 {
       stream: false,
       onStreamError: (err) => callback(this._formatError(err, "ESTREAM", false, "API"))
     };
-    if (typeof message.on === "function") {
-      pendingSend.stream = message;
+    if (typeof message2.on === "function") {
+      pendingSend.stream = message2;
       pendingSend.stream.on("error", pendingSend.onStreamError);
     }
     this._pendingSend = pendingSend;
@@ -30309,10 +30111,10 @@ var SMTPConnection = class extends EventEmitter2 {
     this._setEnvelope(envelope, (err, info) => {
       if (err) {
         const stream2 = new PassThrough4();
-        if (typeof message.pipe === "function") {
-          message.pipe(stream2);
+        if (typeof message2.pipe === "function") {
+          message2.pipe(stream2);
         } else {
-          stream2.write(message);
+          stream2.write(message2);
           stream2.end();
         }
         return callback(err);
@@ -30329,10 +30131,10 @@ var SMTPConnection = class extends EventEmitter2 {
         result.response = str;
         return callback(null, result);
       });
-      if (typeof message.pipe === "function") {
-        message.pipe(stream);
+      if (typeof message2.pipe === "function") {
+        message2.pipe(stream);
       } else {
-        stream.write(message);
+        stream.write(message2);
         stream.end();
       }
     });
@@ -30481,12 +30283,12 @@ var SMTPConnection = class extends EventEmitter2 {
     }
   }
   /** @internal */
-  _formatError(message, type, response, command) {
+  _formatError(message2, type, response, command) {
     let err;
-    if (/Error\]$/i.test(Object.prototype.toString.call(message))) {
-      err = message;
+    if (/Error\]$/i.test(Object.prototype.toString.call(message2))) {
+      err = message2;
     } else {
-      err = new Error(message);
+      err = new Error(message2);
     }
     if (type && type !== "Error") {
       err.code = type;
@@ -31168,8 +30970,8 @@ var SMTPConnection = class extends EventEmitter2 {
   _actionMAIL(str, callback) {
     const envelope = this._envelope;
     if (Number(str.charAt(0)) !== 2) {
-      const message = this._usingSmtpUtf8 && /^550 /.test(str) && /[\x80-\uFFFF]/.test(envelope.from) ? "Internationalized mailbox name not allowed" : "Mail command failed";
-      return callback(this._formatError(message, "EENVELOPE", str, "MAIL FROM"));
+      const message2 = this._usingSmtpUtf8 && /^550 /.test(str) && /[\x80-\uFFFF]/.test(envelope.from) ? "Internationalized mailbox name not allowed" : "Mail command failed";
+      return callback(this._formatError(message2, "EENVELOPE", str, "MAIL FROM"));
     }
     if (!envelope.rcptQueue.length) {
       return callback(this._formatError("Can't send mail - no recipients defined", "EENVELOPE", false, "API"));
@@ -31197,9 +30999,9 @@ var SMTPConnection = class extends EventEmitter2 {
     let err;
     const curRecipient = this._recipientQueue.shift();
     if (Number(str.charAt(0)) !== 2) {
-      const message = this._usingSmtpUtf8 && /^553 /.test(str) && /[\x80-\uFFFF]/.test(curRecipient) ? "Internationalized mailbox name not allowed" : "Recipient command failed";
+      const message2 = this._usingSmtpUtf8 && /^553 /.test(str) && /[\x80-\uFFFF]/.test(curRecipient) ? "Internationalized mailbox name not allowed" : "Recipient command failed";
       envelope.rejected.push(curRecipient);
-      err = this._formatError(message, "EENVELOPE", str, "RCPT TO");
+      err = this._formatError(message2, "EENVELOPE", str, "RCPT TO");
       err.recipient = curRecipient;
       envelope.rejectedErrors.push(err);
     } else {
@@ -34541,13 +34343,13 @@ async function sendReport(root, options = {}) {
   const hours = options.hours && options.hours > 0 ? options.hours : email2.period_hours || 168;
   const { html, counts } = buildReportHtml(root, hours);
   const dashboard = writeHtml(root);
-  const transport2 = nodemailer_default.createTransport({
+  const transport = nodemailer_default.createTransport({
     host: email2.smtp_host,
     port: email2.smtp_port,
     secure: email2.smtp_secure,
     auth: { user, pass }
   });
-  const info = await transport2.sendMail({
+  const info = await transport.sendMail({
     from,
     to,
     subject: email2.subject.replace("{period}", periodLabel(hours)),
@@ -34556,6 +34358,31 @@ async function sendReport(root, options = {}) {
   });
   return { sent_to: to, from, period_hours: hours, message_id: info.messageId, ...counts };
 }
+
+// src/scraper/http.ts
+var USER_AGENT = "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36";
+var TIMEOUT_MS2 = 3e4;
+async function get(url, accept) {
+  const response = await fetch(url, {
+    headers: {
+      "User-Agent": USER_AGENT,
+      "Accept-Language": "ru-RU,ru;q=0.9",
+      Accept: accept
+    },
+    signal: AbortSignal.timeout(TIMEOUT_MS2)
+  });
+  if (!response.ok) {
+    throw new Error(`HTTP ${response.status} for ${url}`);
+  }
+  return response;
+}
+async function fetchText(url) {
+  return (await get(url, "text/html")).text();
+}
+async function fetchJson(url) {
+  return await (await get(url, "application/json")).json();
+}
+var sleep = (ms) => new Promise((resolve4) => setTimeout(resolve4, ms));
 
 // src/scraper/parse.ts
 function isoUtc(value) {
@@ -34692,6 +34519,142 @@ async function fetchBranchReviews(branch, key, locale, limit, sinceMs) {
   return result;
 }
 
+// src/scraper/branches.ts
+var STATE_MARKER = "initialState = JSON.parse('";
+var ESCAPES = { n: "\n", r: "\r", t: "	", b: "\b", f: "\f" };
+function branchId(value) {
+  const raw = String(value).trim();
+  if (/^\d{6,}$/.test(raw)) {
+    return raw;
+  }
+  return /\/firm\/(\d{6,})/.exec(raw)?.[1];
+}
+function branchUrl(cfg, id) {
+  return `https://${cfg.domain}/${cfg.city}/firm/${id}`;
+}
+function readJsString(html, start) {
+  const out = [];
+  let i = start;
+  let chunk = start;
+  while (i < html.length) {
+    const ch = html[i];
+    if (ch === "'") {
+      out.push(html.slice(chunk, i));
+      return out.join("");
+    }
+    if (ch !== "\\") {
+      i += 1;
+      continue;
+    }
+    out.push(html.slice(chunk, i));
+    const next = html[i + 1];
+    if (next === "u") {
+      out.push(String.fromCharCode(parseInt(html.slice(i + 2, i + 6), 16)));
+      i += 6;
+    } else if (next === "x") {
+      out.push(String.fromCharCode(parseInt(html.slice(i + 2, i + 4), 16)));
+      i += 4;
+    } else {
+      out.push(ESCAPES[next] ?? next);
+      i += 2;
+    }
+    chunk = i;
+  }
+  throw new Error("2GIS page state is not terminated");
+}
+function pageBranches(html, cfg) {
+  const at = html.indexOf(STATE_MARKER);
+  if (at < 0) {
+    throw new Error("2GIS page has no initialState (layout changed or request was blocked)");
+  }
+  const state = JSON.parse(readJsString(html, at + STATE_MARKER.length));
+  const profiles = state?.data?.entity?.profile ?? {};
+  const branches = [];
+  for (const [id, entry] of Object.entries(profiles)) {
+    const data = entry?.data;
+    if (!data || data.type !== "branch") {
+      continue;
+    }
+    branches.push({
+      id,
+      name: String(data.name || ""),
+      address: String(data.address_name || ""),
+      org_id: String(data.org?.id || ""),
+      rubrics: Array.isArray(data.rubrics) ? data.rubrics.map((r) => String(r?.name || "")).filter(Boolean) : [],
+      rating: typeof data.reviews?.general_rating === "number" ? data.reviews.general_rating : null,
+      reviews_count: typeof data.reviews?.general_review_count === "number" ? data.reviews.general_review_count : null,
+      url: branchUrl(cfg, id)
+    });
+  }
+  return branches;
+}
+function pageApiKey(html) {
+  return /"reviewApiKey":"([0-9a-f-]{20,})"/.exec(html)?.[1];
+}
+function ids(values) {
+  return new Set(values.map(branchId).filter((id) => Boolean(id)));
+}
+async function discoverBranches(cfg) {
+  const errors2 = [];
+  const candidates = /* @__PURE__ */ new Map();
+  let apiKey;
+  for (const query of cfg.queries) {
+    const url = `https://${cfg.domain}/${cfg.city}/search/${encodeURIComponent(query)}`;
+    try {
+      const html = await fetchText(url);
+      apiKey ??= pageApiKey(html);
+      for (const branch of pageBranches(html, cfg)) {
+        candidates.set(branch.id, branch);
+      }
+    } catch (err) {
+      errors2.push(`Search "${query}" failed: ${err instanceof Error ? err.message : String(err)}`);
+    }
+  }
+  const filters = cfg.name_filters.map((f) => f.toLowerCase().trim()).filter(Boolean);
+  const named = [...candidates.values()].filter(
+    (branch) => !filters.length || filters.some((f) => branch.name.toLowerCase().includes(f))
+  );
+  const orgs = new Set(named.map((branch) => branch.org_id).filter(Boolean));
+  const tracked = /* @__PURE__ */ new Map();
+  for (const branch of candidates.values()) {
+    if (named.includes(branch) || orgs.has(branch.org_id)) {
+      tracked.set(branch.id, branch);
+    }
+  }
+  for (const id of ids(cfg.branches)) {
+    if (tracked.has(id)) {
+      continue;
+    }
+    let found = candidates.get(id);
+    if (!found) {
+      try {
+        const html = await fetchText(branchUrl(cfg, id));
+        apiKey ??= pageApiKey(html);
+        found = pageBranches(html, cfg).find((branch) => branch.id === id);
+      } catch (err) {
+        errors2.push(`Branch ${id} lookup failed: ${err instanceof Error ? err.message : String(err)}`);
+      }
+    }
+    tracked.set(
+      id,
+      found ?? {
+        id,
+        name: id,
+        address: "",
+        org_id: "",
+        rubrics: [],
+        rating: null,
+        reviews_count: null,
+        url: branchUrl(cfg, id)
+      }
+    );
+  }
+  for (const id of ids(cfg.exclude_branches)) {
+    tracked.delete(id);
+  }
+  return { branches: [...tracked.values()], apiKey, errors: errors2 };
+}
+
 // src/scraper/run.ts
 async function scrapeOnce(root, full = false) {
   const cfg = loadConfig(root);
@@ -34721,7 +34684,7 @@ async function scrapeOnce(root, full = false) {
       branch.reviews_count = result.reviews_count ?? branch.reviews_count;
       fetched = result.reviews.length;
       collected.push(...result.reviews);
-      errors2.push(...result.errors.map((message) => `${branch.name} (${branch.id}): ${message}`));
+      errors2.push(...result.errors.map((message2) => `${branch.name} (${branch.id}): ${message2}`));
     } catch (err) {
       errors2.push(`${branch.name} (${branch.id}): ${err instanceof Error ? err.message : String(err)}`);
     }
@@ -34773,6 +34736,156 @@ async function scrapeOnce(root, full = false) {
   };
   saveRun(root, summary);
   return summary;
+}
+
+// src/cli.ts
+var USAGE = `Usage: node server/index.js <command> [options]
+
+Without a command the MCP server starts on stdio.
+
+Commands:
+  run        Collect new reviews, analyse them with the LLM, rebuild data/index.html
+  analyze    Analyse saved reviews only (no scraping)
+  email      Email the report only (no scraping)
+  help       Show this message
+
+Options:
+  --full         run: backfill the archive up to max_reviews_per_branch
+  --email        run: email the report after collecting
+  --to a@b,c@d   email recipients (default: email.to in config.json)
+  --hours N      report window for --email / email (default: email.period_hours);
+                 analyze: only reviews from the last N hours
+  --force        analyze: re-classify reviews that already have an analysis
+
+Secrets come from the environment: OPENROUTER_API_KEY, SMTP_USER, SMTP_PASS.
+Exit code is 0 on success and 1 when the scrape or the email failed.`;
+function parseArgs(args) {
+  const flags = { full: false, email: false, force: false };
+  for (let i = 0; i < args.length; i += 1) {
+    const arg = args[i];
+    const [name2, inline] = arg.split("=", 2);
+    const value = () => {
+      const next = inline ?? args[++i];
+      if (next === void 0) throw new Error(`${name2} needs a value`);
+      return next;
+    };
+    switch (name2) {
+      case "--full":
+        flags.full = true;
+        break;
+      case "--email":
+        flags.email = true;
+        break;
+      case "--force":
+        flags.force = true;
+        break;
+      case "--to":
+        flags.to = value().split(",").map((address) => address.trim()).filter(Boolean);
+        break;
+      case "--hours": {
+        const hours = Number(value());
+        if (!Number.isInteger(hours) || hours < 0) throw new Error("--hours must be a whole number of hours");
+        flags.hours = hours;
+        break;
+      }
+      default:
+        throw new Error(`Unknown option: ${arg}`);
+    }
+  }
+  return flags;
+}
+var print = (value) => process.stdout.write(JSON.stringify(value, null, 2) + "\n");
+var message = (err) => err instanceof Error ? err.message : String(err);
+async function runCli(args) {
+  const [command, ...rest] = args;
+  if (!command || command === "help" || command === "--help" || command === "-h") {
+    process.stdout.write(USAGE + "\n");
+    return command ? 0 : 1;
+  }
+  let flags;
+  try {
+    flags = parseArgs(rest);
+  } catch (err) {
+    process.stderr.write(`${message(err)}
+
+${USAGE}
+`);
+    return 1;
+  }
+  const root = scraperRoot();
+  const started = (/* @__PURE__ */ new Date()).toISOString();
+  try {
+    if (command === "run") {
+      const summary = await scrapeOnce(root, flags.full);
+      let email2 = null;
+      let failed = false;
+      if (flags.email) {
+        try {
+          email2 = await sendReport(root, { to: flags.to, hours: flags.hours });
+        } catch (err) {
+          email2 = { error: message(err) };
+          failed = true;
+        }
+      }
+      print({ command, started, ...summary, email: email2 });
+      return failed ? 1 : 0;
+    }
+    if (command === "analyze") {
+      const result = await analyzeReviews(root, { force: flags.force, hours: flags.hours ?? 0 });
+      print({ command, started, ...result, dashboard: writeHtml(root) });
+      return 0;
+    }
+    if (command === "email") {
+      print({ command, started, ...await sendReport(root, { to: flags.to, hours: flags.hours }) });
+      return 0;
+    }
+  } catch (err) {
+    process.stderr.write(`${command} failed: ${message(err)}
+`);
+    return 1;
+  }
+  process.stderr.write(`Unknown command: ${command}
+
+${USAGE}
+`);
+  return 1;
+}
+
+// src/reviews.ts
+function recentReviews(root, hours, limit, maxRating, sentiment, includeIrrelevant = false) {
+  const cap = Math.max(1, Math.min(limit, 200));
+  let [reviews] = mergeReviews(loadExisting(root), []);
+  if (hours > 0) {
+    reviews = lookbackReviews(reviews, hours);
+  }
+  if (maxRating !== void 0) {
+    reviews = reviews.filter((review) => review.rating !== null && review.rating <= maxRating);
+  }
+  if (!includeIrrelevant) {
+    reviews = reviews.filter((review) => review.analysis?.relevant !== false);
+  }
+  if (sentiment) {
+    reviews = reviews.filter((review) => review.analysis?.sentiment === sentiment);
+  }
+  return reviews.slice(0, cap).map((review) => ({
+    id: review.id,
+    branch: review.branch_name,
+    branch_address: review.branch_address,
+    rating: review.rating,
+    author: review.author,
+    text: review.text,
+    url: review.url,
+    published_at: review.published_at,
+    edited_at: review.edited_at ?? null,
+    likes_count: review.likes_count ?? 0,
+    photos_count: review.photos_count ?? 0,
+    replies_count: review.replies_count,
+    replies: review.replies,
+    relevant: review.analysis?.relevant ?? null,
+    sentiment: review.analysis?.sentiment ?? null,
+    topics: review.analysis?.topics ?? [],
+    summary: review.analysis?.summary ?? ""
+  }));
 }
 
 // src/index.ts
@@ -34956,5 +35069,8 @@ server.tool(
   {},
   async () => text(reviewsPath(scraperRoot()))
 );
-var transport = new StdioServerTransport();
-await server.connect(transport);
+if (process.argv.length > 2) {
+  process.exitCode = await runCli(process.argv.slice(2));
+} else {
+  await server.connect(new StdioServerTransport());
+}

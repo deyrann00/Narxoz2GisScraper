@@ -3,6 +3,7 @@ import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js"
 import { z } from "zod";
 import { existsSync, readdirSync, readFileSync } from "node:fs";
 import { join } from "node:path";
+import { runCli } from "./cli.js";
 import { pluginRoot, reviewsPath, scraperRoot } from "./repo.js";
 import { recentReviews } from "./reviews.js";
 import { discoverBranches } from "./scraper/branches.js";
@@ -213,5 +214,9 @@ server.tool(
   async () => text(reviewsPath(scraperRoot()))
 );
 
-const transport = new StdioServerTransport();
-await server.connect(transport);
+// With arguments this is a one-shot command (cron, Docker); without, an MCP server on stdio.
+if (process.argv.length > 2) {
+  process.exitCode = await runCli(process.argv.slice(2));
+} else {
+  await server.connect(new StdioServerTransport());
+}
